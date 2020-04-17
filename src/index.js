@@ -1,10 +1,13 @@
 const allBeersEndPointURL = "http://localhost:3000/beers"
+const beerUL = document.getElementById('beer-list')
+const detailURL = "http://localhost:3000/beers/:id"
 
 
 document.addEventListener('DOMContentLoaded', () => {
 console.log ("Working")
 
 
+fetchAllBeers()
 
 
 
@@ -17,24 +20,37 @@ console.log ("Working")
 
 })
 
-
 function fetchAllBeers(){
-
     fetch(allBeersEndPointURL)
-    console.log(allBeersEndPointURL)
-    .then (r => r.json())
-    console.log(r.json())
-    .then (beers => beer)
+   // console.log(allBeersEndPointURL)
+   .then (response => response.json())
+   // console.log()
+   .then (beers => beers.forEach(function(beer){
+       renderBeers(beer)
+   })
+   )
 
 }
 
 function renderBeers(beer){
-    const li = document.createElement('li')
-    li.innerHTML = `
-  <li class="list-group-item">Beer title 1</li>
-  <li class="list-group-item">Beer title 2</li>
-  `
+   const li = document.createElement('li')
+   li.innerHTML = `
+   <li class="list-group-item">${beer.name} 1</li>
   
+ `
 
+beerUL.append(li)
+
+}
+
+function fetchBeerDetails(){
+    fetch(detailURL)
+   // console.log(allBeersEndPointURL)
+   .then (response => response.json())
+   // console.log()
+   .then (beers => beers.forEach(function(beer){
+       renderBeers(beer)
+   })
+   )
 
 }
