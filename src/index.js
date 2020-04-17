@@ -25,12 +25,24 @@ function renderBeer(beer) {
 
 ul.addEventListener("click", function (event) {
 	if (event.target.className === "list-group-item") {
-		beerPanel.innerHTML = `
-        <h1>Beer Name</h1>
-<img src="<add beer img url here>">
-<h3>Beer Tagline</h3>
-<p>Beer Description</p>
+		beerList.forEach(function (beer) {
+			if (beer.id == event.target.dataset.id) {
+				console.log(beer);
+				console.log(beerPanel);
+				beerPanel.innerHTML = `
+                <h1>Beer Name: ${beer.name}</h1>
+                <img src="${beer.image_url}">
+                <h3>Beer Tagline: ${beer.tagline}</h3>
+                <p>Beer Description: ${beer.description}</p>
         `;
+				console.log(beerPanel);
+			}
+		});
+		// fetch(`http://localhost:3000/beers/${event.target.dataset.id}`)
+		// 	.then((response) => response.json())
+		// 	.then(console.log(response));
+		// then((beer) => {
+		// 	// });
 	}
 });
 getBeers();
