@@ -10,7 +10,7 @@ console.log ("Working")
 
 fetchAllBeers()
 
-
+//next step was to create a conditional to where if click is beer name run fetchBeerDetail()
 
 
 
