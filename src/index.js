@@ -3,7 +3,7 @@ const beerList=document.getElementById("beer-list")
 const beerDetail=document.getElementById("beer-detail")
 
 fetchBeer();
-showBeer();
+
 
 
 function fetchBeer(){
@@ -27,16 +27,43 @@ function renderBeer(beer){
     beerList.append(list)
 }
 
-function showBeer(){
+
     document.addEventListener("click",function(e){
 
         if(e.target.className==="List-group-item"){
-            
+            console.dir(e.target)
+            // fetchBeerShow()
+            // console.dir(e.target)
+            // const div=document.createElement("div")
+            // div.innerHTML=`
+            // <h1>${beer.name}</h1>
+            // <img src=${beer.image_url}>
+            // <h3>${beer.tagline}</h3>
+            // <p>${beer.description}</p>
+            // `
+            // beerDetail.append(div)
         }
     
     })
+
+
+function fetchBeerShow(){
+    fetch(url)
+    .then(resp =>resp.json())
+    .then(beers => beers.forEach(beer =>{
+
+        beerShow(beer)
+    })
+    )
 }
 
-function beerDetail(){
-    
+function beerShow(beer){
+    const div=document.createElement("div")
+    div.innerHTML=`
+    <h1>${beer.name}</h1>
+    <img src=${beer.image_url}>
+    <h3>${beer.tagline}</h3>
+    <p>${beer.description}</p>
+    `
+    beerDetail.append(div)
 }
