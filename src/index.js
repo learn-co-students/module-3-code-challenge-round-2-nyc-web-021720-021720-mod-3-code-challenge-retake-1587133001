@@ -20,7 +20,7 @@ function renderBeer(beer){
 
     const list=document.createElement("li")
     list.className="List-group-item"
-    
+    list.dataset.id=beer.id
     list.innerHTML=`
      ${beer.name}
     `
@@ -29,13 +29,26 @@ function renderBeer(beer){
 
 
     document.addEventListener("click",function(e){
-
+        
         if(e.target.className==="List-group-item"){
-            console.dir(e.target)
+            let id= e.target.dataset.id
+
+            // console.dir(e.target)
+            // console.dir(e.target.dataset.id)
+            
+            // if statement for not piling in one page (no time! aghhh)
+           
+            fetch(`http://localhost:3000/beers/${id}`)
+            .then(resp =>resp.json())
+            .then(beer => beerShow(beer))
+            
+            
+
+            // console.dir(e.target)
             // fetchBeerShow()
             // console.dir(e.target)
             // const div=document.createElement("div")
-            // div.innerHTML=`
+            // beerDetail.innerHTML=`
             // <h1>${beer.name}</h1>
             // <img src=${beer.image_url}>
             // <h3>${beer.tagline}</h3>
@@ -47,15 +60,16 @@ function renderBeer(beer){
     })
 
 
-function fetchBeerShow(){
-    fetch(url)
-    .then(resp =>resp.json())
-    .then(beers => beers.forEach(beer =>{
+// function fetchBeerShow(){
+//     fetch("http://localhost:3000/beers/:id")
+//     .then(resp =>resp.json())
+    
+//     .then(beers => beers.forEach(beer =>{
 
-        beerShow(beer)
-    })
-    )
-}
+//         beerShow(beer)
+//     })
+//     )
+// }
 
 function beerShow(beer){
     const div=document.createElement("div")
